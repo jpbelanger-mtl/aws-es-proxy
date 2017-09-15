@@ -112,8 +112,8 @@ func (p *proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Sign the request with AWSv4
-	payload := bytes.NewReader(replaceBody(req))
-	p.Signer.Sign(req, payload, p.Service, p.Region, time.Now())
+	//payload := bytes.NewReader(replaceBody(req))
+	//p.Signer.Sign(req, payload, p.Service, p.Region, time.Now())
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {

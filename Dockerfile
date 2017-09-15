@@ -13,6 +13,8 @@ RUN go build -o aws-es-proxy
 FROM alpine:3.6
 
 COPY --from=0 /go/src/app/aws-es-proxy /
+RUN apk update && apk upgrade && \
+    apk add --no-cache ca-certificates
 
 ENV PORT_NUM 9200
 CMD ["./aws-es-proxy", "-h"]
