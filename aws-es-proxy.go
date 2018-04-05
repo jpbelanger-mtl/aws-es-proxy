@@ -111,6 +111,13 @@ func (p *proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		req.Header.Set("Kbn-Version", val[0])
 	}
 
+	// Workaround for ES 6.0
+	if val, ok := r.Header["Content-Type"]; ok {
+		if val[0] == "application/json" {
+			req.Header.Set("Content-Type", "application/json")
+		}
+ 	}
+
 	// Sign the request with AWSv4
 	//payload := bytes.NewReader(replaceBody(req))
 	//p.Signer.Sign(req, payload, p.Service, p.Region, time.Now())
